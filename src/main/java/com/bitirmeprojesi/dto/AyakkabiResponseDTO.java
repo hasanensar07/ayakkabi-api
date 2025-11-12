@@ -1,14 +1,11 @@
 package com.bitirmeprojesi.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AyakkabiResponseDTO { //get yani dönüş için
-    // ID dahil, veritabanından gelen veriler
+public class AyakkabiResponseDTO {
     private Long urunId;
     private String urunIsmi;
     private String urunModel;
