@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import com.bitirmeprojesi.dto.AyakkabiRequestDTO;
 import com.bitirmeprojesi.dto.AyakkabiResponseDTO;
 import com.bitirmeprojesi.services.IAyakkabiService;
+
+import jakarta.validation.Valid;
+
 import com.bitirmeprojesi.controller.IAyakkabiController;
 
 @RestController
@@ -40,15 +43,14 @@ public class AyakkabiController implements IAyakkabiController {
     // POST (CREATE) - Yeni Ekle
     @Override
     @PostMapping
-    public AyakkabiResponseDTO ayakkabiEkle(@RequestBody AyakkabiRequestDTO yeniAyakkabi) {
-        return ayakkabiService.save(yeniAyakkabi);
+    public AyakkabiResponseDTO ayakkabiEkle(@Valid @RequestBody AyakkabiRequestDTO yeniAyakkabiDTO) { 
+        return ayakkabiService.save(yeniAyakkabiDTO);
     }
 
     // PUT (UPDATE) - Güncelleme
     @Override
     @PutMapping(path = "/listele/{id}")
-    public AyakkabiResponseDTO ayakkabiyiGuncelle(@PathVariable Long id,
-                                                  @RequestBody AyakkabiRequestDTO guncelAyakkabi) {
+    public AyakkabiResponseDTO ayakkabiyiGuncelle(@PathVariable Long id, @RequestBody AyakkabiRequestDTO guncelAyakkabi) {
         return ayakkabiService.update(id, guncelAyakkabi);
     }
 
