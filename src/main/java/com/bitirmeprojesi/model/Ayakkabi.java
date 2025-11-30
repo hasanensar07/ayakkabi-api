@@ -1,8 +1,10 @@
 package com.bitirmeprojesi.model;
 
+import java.util.*;
+
 import jakarta.persistence.*;
 import lombok.*;
-import jakarta.persistence.CascadeType;
+
 
 @Getter
 @Setter
@@ -37,11 +39,28 @@ public class Ayakkabi {
     
  
 
+
+ // YENİ İLİŞKİ TANIMI: (@OneToMany Side)
+ @OneToMany(mappedBy = "ayakkabi", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Review> reviews; // Bu ayakkabıya ait tüm yorumları tutar.
+ 
+
+//YENİ İLİŞKİ TANIMI (@ManyToMany Side - Owning Side)
+@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+@JoinTable(
+  // Ara tablonun adı (Hibernate bunu otomatik oluşturur)
+  name = "ayakkabi_etiket", 
+  // Bu tabloya Ayakkabi ID'si nasıl bağlanacak?
+  joinColumns = @JoinColumn(name = "ayakkabi_id"), 
+  // Karşı taraftaki Etiket ID'si nasıl bağlanacak?
+  inverseJoinColumns = @JoinColumn(name = "etiket_id") 
+)
+private List<Etiket> etiketler; // Bu ayakkabıya ait tüm etiketleri tutar.
+    
+ 
+ 
+
     
 
-    // İLİŞKİ TANIMI (Owning Side - Sahip Taraf)
-    // Hocanın Customer sınıfında yaptığı gibi:
-    @OneToOne(cascade = CascadeType.ALL) 
-    @JoinColumn(name = "stok_id", referencedColumnName = "id") 
-    private Stok stok; // Değişken adı 'stok' (mappedBy buna bakıyor)
+    
 }

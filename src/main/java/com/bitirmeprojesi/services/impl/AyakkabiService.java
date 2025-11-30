@@ -8,7 +8,7 @@ import com.bitirmeprojesi.services.IAyakkabiService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional; // Transactional importu
+import org.springframework.transaction.annotation.Transactional; 
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,11 +34,7 @@ public class AyakkabiService implements IAyakkabiService {
         Ayakkabi ayakkabi = new Ayakkabi();
         BeanUtils.copyProperties(requestDTO, ayakkabi);
 
-        // ✅ KRİTİK DÜZELTME: Stok nesnesi, Ayakkabi'yı geri işaret etmeli.
-        if (ayakkabi.getStok() != null) {
-            ayakkabi.getStok().setAyakkabi(ayakkabi); 
-        }
-        
+     
         Ayakkabi savedEntity = ayakkabiRepository.save(ayakkabi);
         return convertEntityToResponse(savedEntity);
     }
@@ -50,11 +46,7 @@ public class AyakkabiService implements IAyakkabiService {
         BeanUtils.copyProperties(requestDTO, ayakkabi);
         ayakkabi.setUrunId(urunId); 
         
-        // KRİTİK DÜZELTME: Güncelleme sırasında da ilişkiyi kur.
-        if (ayakkabi.getStok() != null) {
-            ayakkabi.getStok().setAyakkabi(ayakkabi);
-        }
-        
+      
         Ayakkabi updatedEntity = ayakkabiRepository.save(ayakkabi);
         return convertEntityToResponse(updatedEntity);
     }

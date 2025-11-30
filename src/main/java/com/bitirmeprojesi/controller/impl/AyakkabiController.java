@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import com.bitirmeprojesi.services.IReviewService;
 
 @RestController
 @RequestMapping("/api/ayakkabilar")
@@ -16,6 +17,9 @@ public class AyakkabiController implements IAyakkabiController {
 
     @Autowired
     private IAyakkabiService ayakkabiService;
+    
+    @Autowired
+    private IReviewService reviewService;
 
     @GetMapping("/listele")
     public List<AyakkabiResponseDTO> findAll() {
@@ -47,4 +51,15 @@ public class AyakkabiController implements IAyakkabiController {
         ayakkabiService.deleteById(id);
         return true;
     }
+    
+    
+    
+    @PostMapping(path = "/{ayakkabiId}/review") // YOL: /api/ayakkabilar/1/review
+    public ReviewResponseDTO addReviewToAyakkabi(@PathVariable Long ayakkabiId, @RequestBody ReviewRequestDTO requestDTO) {
+        // Servis metodunu çağır, Ayakkabı ID'si ve yorum verisi gönder
+        return reviewService.saveReview(ayakkabiId, requestDTO);
+    }
+    
+    
+    
 }
