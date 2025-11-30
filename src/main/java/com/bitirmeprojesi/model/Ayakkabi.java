@@ -2,6 +2,7 @@ package com.bitirmeprojesi.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.CascadeType;
 
 @Getter
 @Setter
@@ -33,4 +34,14 @@ public class Ayakkabi {
 
     @Column(name = "uretici_ulke")
     private String ureticiUlke;
+    
+ 
+
+    
+
+    // İLİŞKİ TANIMI (Owning Side - Sahip Taraf)
+    // Hocanın Customer sınıfında yaptığı gibi:
+    @OneToOne(cascade = CascadeType.ALL) 
+    @JoinColumn(name = "stok_id", referencedColumnName = "id") 
+    private Stok stok; // Değişken adı 'stok' (mappedBy buna bakıyor)
 }

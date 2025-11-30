@@ -4,7 +4,7 @@ import com.bitirmeprojesi.dto.*;
 import java.util.List;
 
 public interface IAyakkabiService {
-    AyakkabiResponseDTO save(AyakkabiRequestDTO ayakkabiRequestDTO);
+	AyakkabiResponseDTO saveAyakkabi(AyakkabiRequestDTO ayakkabiRequestDTO);
     List<AyakkabiResponseDTO> findAll();
     AyakkabiResponseDTO findById(Long id);
     void deleteById(Long id);

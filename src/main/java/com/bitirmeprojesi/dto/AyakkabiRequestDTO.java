@@ -26,4 +26,5 @@ public class AyakkabiRequestDTO {
 
     @NotBlank(message = "Üretici ülke boş bırakılamaz.")
     private String ureticiUlke;
+    
 }

@@ -34,7 +34,7 @@ public class AyakkabiController implements IAyakkabiController {
 
     @PostMapping
     public AyakkabiResponseDTO ayakkabiEkle(@Valid @RequestBody AyakkabiRequestDTO yeniAyakkabi) {
-        return ayakkabiService.save(yeniAyakkabi);
+        return ayakkabiService.saveAyakkabi(yeniAyakkabi);
     }
 
     @PutMapping("/listele/{id}")
